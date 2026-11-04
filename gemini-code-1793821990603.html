@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offline HTML Game Hub</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body data-theme="classic" data-color="default">
+  <div class="layout">
+    <!-- Left Area: Game Screen + Underbar (Game Name & Download Button) -->
+    <main class="left-zone">
+      <div class="player-wrapper">
+        <div id="game-container" class="game-box">
+          <div id="status-overlay" class="status-overlay">
+            Select a game on the right to cache and play
+          </div>
+          <iframe
+            id="game-frame"
+            title="Game Screen"
+            sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-forms allow-modals"
+          ></iframe>
+          <button id="fullscreen-btn" class="fullscreen-btn" title="Toggle Fullscreen" aria-label="Toggle Fullscreen">
+            &#x26F6;
+          </button>
+        </div>
+
+        <!-- Bar directly under the game area: Playing Game Name + Download Button on the right -->
+        <div class="under-game-bar">
+          <div id="current-game-title" class="current-game-title">
+            No Game Loaded
+          </div>
+          <button id="download-btn" class="download-btn" disabled title="Download currently cached game">
+            &darr;
+          </button>
+        </div>
+      </div>
+
+      <!-- Gear Icon anchored at the bottom-right of the main area (next to the sidebar) -->
+      <button id="settings-btn" class="settings-gear-btn" title="Open Interface & Theme Settings" aria-label="Settings">
+        &#9881;
+      </button>
+    </main>
+
+    <!-- Right Sidebar: Top Smart Search + Scrollable Game List -->
+    <aside class="right-sidebar">
+      <div class="search-container">
+        <span class="search-icon" aria-hidden="true">&#128269;</span>
+        <input
+          type="text"
+          id="game-search"
+          class="search-input"
+          placeholder="Smart search (e.g. minecraft, soccer, fps)..."
+          autocomplete="off"
+        />
+      </div>
+      <div id="game-list" class="game-list">
+        <div class="loading-item">Loading repository games...</div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Settings Modal Page -->
+  <div id="settings-modal" class="settings-modal hidden" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+    <div class="settings-card">
+      <div class="settings-header">
+        <h2 id="settings-title">Interface &amp; Theme Settings</h2>
+        <button id="close-settings-btn" class="close-settings-btn" title="Close Settings">&times;</button>
+      </div>
+
+      <div class="settings-section">
+        <h3>User Interface Theme</h3>
+        <p class="settings-hint">Pure CSS console interfaces (no copyrighted assets)</p>
+        <div class="theme-grid">
+          <button class="theme-option active" data-set-theme="classic">
+            <span class="theme-title">Classic 8-Bit</span>
+            <span class="theme-desc">Original crisp monochrome borders</span>
+          </button>
+          <button class="theme-option" data-set-theme="ps4">
+            <span class="theme-title">PS-Style Wave</span>
+            <span class="theme-desc">Deep ambient blue &amp; glowing tiles</span>
+          </button>
+          <button class="theme-option" data-set-theme="nintendo">
+            <span class="theme-title">N-Switch Minimal</span>
+            <span class="theme-desc">Clean cards with red &amp; cyan accents</span>
+          </button>
+          <button class="theme-option" data-set-theme="batocera">
+            <span class="theme-title">Batocera Retro</span>
+            <span class="theme-desc">Dark arcade cabinet &amp; neon synth glow</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h3>Color Accent Override</h3>
+        <div class="color-row">
+          <button class="color-pill active" data-set-color="default">Theme Default</button>
+          <button class="color-pill" data-set-color="emerald">Emerald</button>
+          <button class="color-pill" data-set-color="crimson">Crimson</button>
+          <button class="color-pill" data-set-color="gold">Cyber Gold</button>
+          <button class="color-pill" data-set-color="violet">Neon Violet</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./script.js" defer></script>
+</body>
+</html>
