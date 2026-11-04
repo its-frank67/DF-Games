@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offline HTML Game Hub</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+<body data-theme="classic">
+  <div class="layout">
+    <main class="left-zone">
+      <div class="player-wrapper">
+        <div id="game-container" class="game-box">
+          <div id="status-overlay" class="status-overlay">
+            Select a game on the right to cache and play
+          </div>
+          <iframe
+            id="game-frame"
+            title="Game Screen"
+            sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-forms"
+          ></iframe>
+          <button id="fullscreen-btn" class="fullscreen-btn" title="Toggle Fullscreen" aria-label="Toggle Fullscreen">
+            &#x26F6;
+          </button>
+        </div>
+
+        <div class="under-game-bar">
+          <div id="current-game-title" class="current-game-title">
+            No Game Loaded
+          </div>
+          <button id="download-btn" class="download-btn" disabled title="Download currently cached game">
+            &darr;
+          </button>
+        </div>
+      </div>
+
+      <button id="settings-btn" class="settings-gear-btn" title="Settings" aria-label="Settings">
+        &#9881;
+      </button>
+    </main>
+
+    <aside class="right-sidebar">
+      <div class="search-container">
+        <span class="search-icon" aria-hidden="true">&#128269;</span>
+        <input
+          type="text"
+          id="game-search"
+          class="search-input"
+          placeholder="Search..."
+          autocomplete="off"
+        />
+      </div>
+      <div id="game-list" class="game-list">
+        <div class="loading-item">Loading repository games...</div>
+      </div>
+    </aside>
+  </div>
+
+  <div id="settings-modal" class="settings-modal hidden" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+    <div class="settings-card">
+      <div class="settings-header">
+        <h2 id="settings-title">Settings</h2>
+        <button id="close-settings-btn" class="close-settings-btn" title="Close Settings">&times;</button>
+      </div>
+
+      <div class="settings-section">
+        <h3>Themes</h3>
+        <div class="theme-grid">
+          <button class="theme-option active" data-set-theme="classic">Classic</button>
+          <button class="theme-option" data-set-theme="ps4">PS4 Style</button>
+          <button class="theme-option" data-set-theme="nintendo">N-Switch</button>
+          <button class="theme-option" data-set-theme="batocera">Batocera</button>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h3>Colors</h3>
+        <div class="color-tabs">
+          <button id="tab-btn-1" class="tab-btn active" data-tab="1">Layer 1 (Background)</button>
+          <button id="tab-btn-2" class="tab-btn" data-tab="2">Layer 2 (Outline)</button>
+        </div>
+        
+        <div id="tab-pane-1" class="tab-pane active">
+          <label class="glow-label"><input type="checkbox" id="glow-layer1"> Enable Glow</label>
+          <div id="swatches-layer1" class="swatches-grid"></div>
+        </div>
+        
+        <div id="tab-pane-2" class="tab-pane hidden">
+          <label class="glow-label"><input type="checkbox" id="glow-layer2"> Enable Glow</label>
+          <div id="swatches-layer2" class="swatches-grid"></div>
+        </div>
+      </div>
+
+      <div class="settings-section credits-section">
+        <button id="credits-toggle" class="credits-toggle">Credits &amp; Source</button>
+        <div id="credits-content" class="credits-content hidden">
+          <p class="creator-text">Created by Frank Cruz and Duanny</p>
+          <h4>Source Code</h4>
+          <div class="source-btns">
+            <button id="dl-html" class="src-btn">HTML</button>
+            <button id="dl-css" class="src-btn">CSS</button>
+            <button id="dl-js" class="src-btn">JS</button>
+            <button id="dl-zip" class="src-btn highlight">Bundle (ZIP)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./script.js" defer></script>
+</body>
+</html>
